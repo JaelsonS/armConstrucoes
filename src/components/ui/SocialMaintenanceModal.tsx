@@ -67,8 +67,8 @@ export function SocialMaintenanceModal({ open, network, onClose }: Props) {
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-ink-muted">
               Neste momento as nossas redes sociais estão em manutenção. Fale
-              diretamente com o {whatsapp.contactName} no WhatsApp — responde com
-              rapidez e acompanha o seu pedido de orçamento.
+              diretamente com a {whatsapp.contactName} no WhatsApp — respondemos
+              com rapidez e acompanhamos o seu pedido de orçamento.
             </p>
 
             <a
@@ -78,7 +78,7 @@ export function SocialMaintenanceModal({ open, network, onClose }: Props) {
               className="mt-7 inline-flex w-full min-h-12 items-center justify-center gap-2 bg-[#25D366] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1ebe57]"
             >
               <WhatsAppIcon className="h-5 w-5" />
-              Falar no WhatsApp com {whatsapp.contactName}
+              Falar no WhatsApp
             </a>
             <p className="mt-3 text-center font-mono text-xs text-ink-muted">
               {whatsapp.display}

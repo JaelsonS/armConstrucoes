@@ -7,6 +7,7 @@ import { Obras } from '@/pages/Obras'
 import { ObraDetail } from '@/pages/ObraDetail'
 import { Orcamento } from '@/pages/Orcamento'
 import { Contactos } from '@/pages/Contactos'
+import { Candidaturas } from '@/pages/Candidaturas'
 import { Privacidade } from '@/pages/Privacidade'
 import { NotFound } from '@/pages/NotFound'
 
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="obras/:slug" element={<ObraDetail />} />
         <Route path="orcamento" element={<Orcamento />} />
         <Route path="contactos" element={<Contactos />} />
+        <Route path="candidaturas" element={<Candidaturas />} />
         <Route path="privacidade" element={<Privacidade />} />
         <Route path="*" element={<NotFound />} />
       </Route>

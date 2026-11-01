@@ -1,9 +1,10 @@
 export const whatsapp = {
-  contactName: 'Paulo',
-  phoneE164: '351910098531',
-  display: '+351 910 098 531',
+  /** Nome do contacto por confirmar — usar genérico até indicação */
+  contactName: 'ARM Construções',
+  phoneE164: '351915492691',
+  display: '+351 915 492 691',
   message:
-    'Olá Paulo, venho do site e gostaria de solicitar um orçamento.',
+    'Olá, venho do site da ARM Construções e gostaria de solicitar um orçamento.',
 } as const
 
 export function whatsappUrl(customMessage?: string) {

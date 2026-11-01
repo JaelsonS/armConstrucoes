@@ -2,8 +2,6 @@
 
 Website institucional de demonstração comercial para **ARM — Construções, Unipessoal Lda.** (Coimbra e arredores).
 
-Base técnica clonada do projeto BH Construções e adaptada à identidade ARM.
-
 ## Stack
 
 - React + TypeScript + Vite
@@ -26,8 +24,15 @@ npm run build
 npm run preview
 ```
 
-## Notas
+## Conteúdo
 
-- Conteúdo de portfólio marcado como demonstrativo.
-- Formulários validam e simulam envio — sem backend nesta demo.
-- Desenvolvido por AF Digital — Soluções Tecnológicas.
+- Headline: *Construímos estruturas. Criamos futuro.*
+- Serviços: construção civil, obras públicas, capoto, estruturas metálicas, remodelações, manutenção
+- Secções especiais: Capoto interativo (camadas + before/after), estruturas metálicas, processo em 5 etapas
+- Portfólio demonstrativo (`ARM-D0X`) e formulários simulados
+- WhatsApp flutuante: 915 492 691
+- Crédito footer: AF Digital — Soluções Tecnológicas
+
+## Deploy (Vercel)
+
+Definir `VITE_SITE_URL` com o domínio final (ver `.env.example`).

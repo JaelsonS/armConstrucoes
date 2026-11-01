@@ -11,7 +11,7 @@ export function Servicos() {
     <>
       <PageMeta
         title="Serviços"
-        description="Construção civil, obras públicas, reabilitação, carpintaria e revestimentos — serviços BH em Coimbra."
+        description="Construção civil, obras públicas, capoto, estruturas metálicas, remodelações e manutenção — serviços ARM em Coimbra."
         path="/servicos"
       />
       <section className="relative overflow-hidden bg-ink pb-16 pt-28 text-white lg:pb-24 lg:pt-36">
@@ -21,8 +21,8 @@ export function Servicos() {
             <SectionHeading
               light
               eyebrow="Serviços"
-              title="Competência em cada etapa da construção."
-              description="Cinco áreas de intervenção, apresentadas com clareza para apoiar a decisão do seu próximo projeto."
+              title="Soluções para construir, renovar e transformar."
+              description="Seis áreas de intervenção, apresentadas com clareza para apoiar a decisão do seu próximo projeto."
             />
           </Reveal>
         </div>
@@ -52,7 +52,9 @@ export function Servicos() {
                         <span className="inline-flex h-11 w-11 items-center justify-center border border-border text-primary">
                           <Icon className="h-5 w-5" strokeWidth={1.75} />
                         </span>
-                        <span className="font-mono text-sm text-primary">{service.number}</span>
+                        <span className="font-mono text-sm text-primary">
+                          ARM-{service.number}
+                        </span>
                       </div>
                     )
                   })()}

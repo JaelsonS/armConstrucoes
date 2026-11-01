@@ -1,16 +1,19 @@
 import { useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Check } from 'lucide-react'
+import { Check, Loader2, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { company } from '@/data/company'
+import { whatsappUrl } from '@/data/whatsapp'
+import { isWeb3FormsConfigured, submitWeb3Form } from '@/lib/web3forms'
 import { cn } from '@/lib/utils'
 
 const tipos = [
   { id: 'construcao-civil', label: 'Construção Civil' },
   { id: 'obras-publicas', label: 'Obras Públicas' },
-  { id: 'reabilitacao', label: 'Reabilitação' },
-  { id: 'carpintaria', label: 'Carpintaria' },
-  { id: 'revestimentos', label: 'Revestimentos' },
+  { id: 'capoto', label: 'Capoto' },
+  { id: 'estruturas-metalicas', label: 'Estruturas Metálicas' },
+  { id: 'remodelacoes', label: 'Remodelações' },
+  { id: 'manutencao-recuperacao', label: 'Manutenção e Recuperação' },
   { id: 'outro', label: 'Outro' },
 ] as const
 
@@ -54,6 +57,9 @@ export function QuoteForm() {
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [done, setDone] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [serverError, setServerError] = useState('')
+  const configured = isWeb3FormsConfigured()
 
   const progress = ((step + 1) / 4) * 100
   const tipoLabel = useMemo(
@@ -85,13 +91,56 @@ export function QuoteForm() {
     return Object.keys(next).length === 0
   }
 
-  function nextStep() {
+  async function nextStep() {
     if (!validateStep()) return
-    if (step === 3) {
+    if (step < 3) {
+      setStep((s) => s + 1)
+      return
+    }
+
+    if (!configured) {
+      setServerError(
+        'Chave Web3Forms em falta. Defina VITE_WEB3FORMS_ACCESS_KEY para enviar orçamentos.',
+      )
+      return
+    }
+
+    setSubmitting(true)
+    setServerError('')
+    const result = await submitWeb3Form({
+      subject: `[Orçamento] ${tipoLabel} — ${data.projectName}`,
+      from_name: 'Site ARM — Orçamentos',
+      form_type: 'orcamento',
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      company: data.companyName || '—',
+      tipo: tipoLabel,
+      project: data.projectName,
+      location: data.location,
+      description: data.description,
+      prazo: data.prazo || '—',
+      budget: data.budget || '—',
+      preference: data.preference,
+      message: [
+        `Tipo: ${tipoLabel}`,
+        `Projeto: ${data.projectName}`,
+        `Localização: ${data.location}`,
+        `Prazo: ${data.prazo || '—'}`,
+        `Orçamento estimado: ${data.budget || '—'}`,
+        `Preferência de contacto: ${data.preference}`,
+        '',
+        data.description,
+      ].join('\n'),
+      replyto: data.email,
+    })
+    setSubmitting(false)
+
+    if (result.ok) {
       setDone(true)
       return
     }
-    setStep((s) => s + 1)
+    setServerError(result.message)
   }
 
   if (done) {
@@ -101,12 +150,11 @@ export function QuoteForm() {
           <Check className="h-6 w-6" />
         </div>
         <h2 className="font-display text-2xl font-bold text-ink sm:text-3xl">
-          Pedido registado nesta demonstração
+          Pedido de orçamento enviado
         </h2>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-ink-muted sm:text-base">
-          O formulário funcionou corretamente, mas <strong>não foi enviado</strong>{' '}
-          para a BH. Em produção, este pedido será integrado com Supabase ou um
-          serviço de email.
+          Recebemos o seu pedido. A ARM analisa os detalhes e responde consigo
+          em breve. Para falar já, use o WhatsApp.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Button
@@ -119,9 +167,17 @@ export function QuoteForm() {
           >
             Novo pedido
           </Button>
-          <Button to="/contactos" variant="outline">
-            Contactar diretamente
-          </Button>
+          <a
+            href={whatsappUrl(
+              `Olá ARM, enviei um pedido de orçamento (${tipoLabel}) pelo site e gostaria de falar consigo.`,
+            )}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center justify-center gap-2 border border-[#25D366]/40 bg-[#25D366]/10 px-5 py-3 text-sm font-semibold text-[#128C7E] transition hover:bg-[#25D366]/20"
+          >
+            <MessageCircle className="h-4 w-4" />
+            Continuar no WhatsApp
+          </a>
         </div>
       </div>
     )
@@ -129,6 +185,13 @@ export function QuoteForm() {
 
   return (
     <div>
+      {!configured ? (
+        <p className="mb-6 border border-amber-500/30 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          Defina <code className="font-mono">VITE_WEB3FORMS_ACCESS_KEY</code> para
+          ativar o envio real dos orçamentos.
+        </p>
+      ) : null}
+
       <div className="mb-8">
         <div className="mb-2 flex items-center justify-between font-mono text-xs uppercase tracking-[0.16em] text-ink-muted">
           <span>Etapa {step + 1} de 4</span>
@@ -243,17 +306,32 @@ export function QuoteForm() {
         </div>
       ) : null}
 
+      {serverError ? (
+        <p className="mt-6 border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-primary" role="alert">
+          {serverError}
+        </p>
+      ) : null}
+
       <div className="mt-8 flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
         <Button
           type="button"
           variant="outline"
-          disabled={step === 0}
+          disabled={step === 0 || submitting}
           onClick={() => setStep((s) => Math.max(0, s - 1))}
         >
           Voltar
         </Button>
-        <Button type="button" onClick={nextStep}>
-          {step === 3 ? 'Confirmar pedido' : 'Continuar'}
+        <Button type="button" onClick={() => void nextStep()} disabled={submitting}>
+          {submitting ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              A enviar…
+            </>
+          ) : step === 3 ? (
+            'Confirmar e enviar'
+          ) : (
+            'Continuar'
+          )}
         </Button>
       </div>
 
@@ -265,6 +343,16 @@ export function QuoteForm() {
         ·{' '}
         <a className="font-semibold text-primary" href={company.emailHref}>
           {company.email}
+        </a>{' '}
+        ·{' '}
+        <a
+          className="inline-flex items-center gap-1 font-semibold text-[#128C7E]"
+          href={whatsappUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <MessageCircle className="h-3.5 w-3.5" />
+          WhatsApp
         </a>
       </p>
     </div>

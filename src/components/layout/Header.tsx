@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, Phone, X } from 'lucide-react'
 import { company } from '@/data/company'
 import { useScrolled } from '@/hooks/useScrolled'
+import { BrandLogo } from '@/components/ui/BrandLogo'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
@@ -11,6 +12,7 @@ const nav = [
   { to: '/empresa', label: 'Empresa' },
   { to: '/servicos', label: 'Serviços' },
   { to: '/obras', label: 'Obras' },
+  { to: '/candidaturas', label: 'Candidaturas' },
   { to: '/contactos', label: 'Contactos' },
 ]
 
@@ -21,6 +23,7 @@ export function Header() {
   const menuId = useId()
   const isHome = location.pathname === '/'
   const solid = scrolled || !isHome || open
+  const phone = company.phones[0]
 
   useEffect(() => {
     setOpen(false)
@@ -46,18 +49,10 @@ export function Header() {
         <Link
           to="/"
           className="flex shrink-0 items-center"
-          aria-label="BH Construção — página inicial"
+          aria-label="ARM Construções — início"
           aria-current={isHome ? 'page' : undefined}
         >
-          <span className="flex h-11 items-center bg-white px-2 py-1 lg:h-12">
-            <img
-              src="/images/bh-logo.png"
-              alt="BH — Construção Civil e Obras Públicas"
-              className="h-9 w-auto object-contain lg:h-10"
-              width={160}
-              height={80}
-            />
-          </span>
+          <BrandLogo variant="dark" />
         </Link>
 
         <nav className="hidden items-center gap-1 lg:flex" aria-label="Principal">
@@ -87,12 +82,12 @@ export function Header() {
             </NavLink>
           ))}
           <a
-            href={company.phones[0].href}
+            href={phone.href}
             className="ml-2 inline-flex items-center gap-2 px-3 py-2 text-sm text-white/75 hover:text-white"
-            aria-label={`Ligar para ${company.phones[0].display}`}
+            aria-label={`Ligar ${phone.display}`}
           >
             <Phone className="h-4 w-4 text-primary" />
-            <span className="hidden xl:inline">{company.phones[0].display}</span>
+            <span className="hidden xl:inline">{phone.display}</span>
           </a>
           <Button to="/orcamento" className="ml-2">
             Pedir orçamento
@@ -100,9 +95,13 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2 lg:hidden">
-          <Button to="/orcamento" className="px-3 py-2 text-xs sm:text-sm">
-            Orçamento
-          </Button>
+          <a
+            href={phone.href}
+            className="inline-flex h-11 w-11 items-center justify-center border border-white/20"
+            aria-label={`Ligar ${phone.display}`}
+          >
+            <Phone className="h-4 w-4" />
+          </a>
           <button
             type="button"
             className="inline-flex h-11 w-11 items-center justify-center border border-white/20"
@@ -147,11 +146,11 @@ export function Header() {
                 Pedir orçamento
               </Button>
               <a
-                href={company.phones[1].href}
+                href={phone.href}
                 className="mt-2 flex items-center justify-center gap-2 py-3 text-sm text-white/75"
               >
                 <Phone className="h-4 w-4 text-primary" />
-                {company.phones[1].display}
+                {phone.display}
               </a>
             </nav>
           </motion.div>

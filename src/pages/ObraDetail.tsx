@@ -97,7 +97,7 @@ export function ObraDetail() {
               </p>
               <p className="mt-3 text-sm text-ink-muted">
                 Este projeto é fictício para fins de demonstração comercial e não
-                representa uma obra real da BH.
+                representa uma obra real da ARM.
               </p>
               <dl className="mt-6 space-y-4 text-sm">
                 <div>

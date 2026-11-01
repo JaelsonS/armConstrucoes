@@ -2,12 +2,13 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { ScrollIndicator } from '@/components/ui/ScrollIndicator'
 import { TechnicalGrid } from '@/components/ui/TechnicalGrid'
+import { company } from '@/data/company'
 
 const lines = [
   { text: 'Construímos', color: 'text-white' },
-  { text: 'o presente.', color: 'text-white' },
-  { text: 'Preparamos', color: 'text-primary' },
-  { text: 'o futuro.', color: 'text-primary' },
+  { text: 'estruturas.', color: 'text-white' },
+  { text: 'Criamos', color: 'text-primary' },
+  { text: 'futuro.', color: 'text-primary' },
 ]
 
 export function Hero() {
@@ -23,7 +24,7 @@ export function Hero() {
       >
         <img
           src="/images/hero-obra.jpg"
-          alt="Edifício em construção com gruas ao entardecer"
+          alt="Edifício em construção ao entardecer com grua"
           className="h-full w-full object-cover"
           width={1920}
           height={1088}
@@ -44,7 +45,7 @@ export function Hero() {
             transition={{ delay: 0.35, duration: 0.6 }}
           >
             <span className="inline-block h-px w-10 bg-primary" aria-hidden />
-            Construção Civil · Obras Públicas
+            {company.tagline}
           </motion.p>
 
           <h1 className="font-display text-[2.6rem] font-extrabold leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl">
@@ -72,8 +73,9 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.6 }}
           >
-            Construção, reabilitação e acabamentos a partir de Coimbra — com
-            rigor técnico e compromisso com cada obra.
+            A ARM Construções desenvolve trabalhos de construção civil, obras
+            públicas, estruturas metálicas, capoto e remodelações, em Coimbra e
+            arredores.
           </motion.p>
 
           <motion.div
@@ -82,9 +84,9 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.15, duration: 0.6 }}
           >
-            <Button to="/obras">Conheça os nossos projetos</Button>
+            <Button to="/servicos">Conheça os nossos serviços</Button>
             <Button to="/contactos" variant="ghost">
-              Fale connosco
+              Fale com a ARM
             </Button>
           </motion.div>
         </div>

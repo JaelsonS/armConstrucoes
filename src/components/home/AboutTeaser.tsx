@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { company } from '@/data/company'
+import { services as serviceList } from '@/data/services'
 import { Reveal } from '@/components/ui/Reveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { TechnicalGrid } from '@/components/ui/TechnicalGrid'
@@ -14,7 +15,7 @@ export function AboutTeaser() {
           <div className="relative overflow-hidden">
             <img
               src="/images/equipa-obra.jpg"
-              alt="Equipa em obra a analisar plantas"
+              alt="Equipamento e contexto de obra"
               className="aspect-[4/5] w-full object-cover"
               loading="lazy"
             />
@@ -22,18 +23,18 @@ export function AboutTeaser() {
               <div className="grid grid-cols-2 gap-4 text-white">
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/60">
-                    Sede
+                    Área
                   </p>
                   <p className="mt-1 font-display text-lg font-semibold">
-                    Coimbra, Portugal
+                    Coimbra e arredores
                   </p>
                 </div>
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/60">
-                    Áreas
+                    Serviços
                   </p>
                   <p className="mt-1 font-display text-lg font-semibold">
-                    5 especialidades
+                    {serviceList.length} especialidades
                   </p>
                 </div>
               </div>
@@ -44,14 +45,14 @@ export function AboutTeaser() {
         <Reveal delay={0.1}>
           <SectionHeading
             eyebrow="Quem somos"
-            title="Experiência que se transforma em obra."
-            description={company.description}
+            title={company.aboutTitle}
+            description={`${company.description} ${company.descriptionExtra}`}
           />
           <Link
             to="/empresa"
             className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:gap-3"
           >
-            Conheça a BH
+            Conheça a empresa
             <ArrowRight className="h-4 w-4" />
           </Link>
         </Reveal>

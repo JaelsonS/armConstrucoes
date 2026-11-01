@@ -1,16 +1,20 @@
-import { MapPinned } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import { Briefcase, MapPinned } from 'lucide-react'
 import { PageMeta } from '@/components/layout/PageMeta'
 import { ContactForm } from '@/components/forms/ContactForm'
 import { Reveal } from '@/components/ui/Reveal'
 import { TechnicalGrid } from '@/components/ui/TechnicalGrid'
 import { company, fullAddress } from '@/data/company'
+import { whatsappUrl } from '@/data/whatsapp'
 
 export function Contactos() {
+  const phone = company.phones[0]
+
   return (
     <>
       <PageMeta
         title="Contactos"
-        description="Contacte a BH em Ribeira de Frades, Coimbra. Telefone, email e pedido de direções."
+        description="Contacte a ARM Construções em Coimbra e arredores. Telefone 915 492 691 e pedido de orçamento."
         path="/contactos"
       />
       <section className="relative overflow-hidden bg-ink pb-14 pt-28 text-white lg:pt-36">
@@ -21,11 +25,11 @@ export function Contactos() {
               Contactos
             </p>
             <h1 className="font-display text-4xl font-bold sm:text-5xl">
-              Fale com a BH.
+              Fale com a ARM.
             </h1>
             <p className="mt-5 max-w-2xl text-white/70">
-              Estamos em Coimbra, disponíveis para conhecer o seu projeto de
-              construção, reabilitação ou acabamentos.
+              Estamos em Coimbra e arredores, disponíveis para conhecer o seu
+              projeto de construção, capoto, estruturas metálicas ou remodelação.
             </p>
           </Reveal>
         </div>
@@ -38,25 +42,44 @@ export function Contactos() {
               {company.legalName}
             </h2>
             <p className="mt-4 text-ink-muted">{fullAddress()}</p>
+            <p className="mt-2 text-sm text-ink-muted">{company.areaServed}</p>
 
             <ul className="mt-8 space-y-3">
-              {company.phones.map((p) => (
-                <li key={p.display}>
-                  <a
-                    href={p.href}
-                    className="text-lg font-semibold text-ink hover:text-primary"
-                  >
-                    {p.display}
-                  </a>
-                  <span className="ml-2 text-sm text-ink-muted">· {p.label}</span>
-                </li>
-              ))}
+              <li>
+                <a
+                  href={phone.href}
+                  className="text-lg font-semibold text-ink hover:text-primary"
+                >
+                  {phone.display}
+                </a>
+                <span className="ml-2 text-sm text-ink-muted">· {phone.label}</span>
+              </li>
               <li>
                 <a
                   href={company.emailHref}
                   className="text-lg font-semibold text-ink hover:text-primary"
                 >
                   {company.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={whatsappUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg font-semibold text-ink hover:text-primary"
+                >
+                  WhatsApp
+                </a>
+              </li>
+              <li>
+                <a
+                  href={company.social.facebookUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg font-semibold text-ink hover:text-primary"
+                >
+                  Facebook · {company.social.facebookLabel}
                 </a>
               </li>
             </ul>
@@ -73,7 +96,7 @@ export function Contactos() {
 
             <div className="mt-10 overflow-hidden border border-border">
               <iframe
-                title="Mapa — localização BH Coimbra"
+                title="Mapa — localização ARM Construções, Botão"
                 src={company.osmEmbedUrl}
                 className="h-72 w-full"
                 loading="lazy"
@@ -88,12 +111,30 @@ export function Contactos() {
                 Enviar mensagem
               </h2>
               <p className="mt-2 text-sm text-ink-muted">
-                Formulário de demonstração — o envio é simulado.
+                O formulário chega à ARM por email (Web3Forms). Conversas rápidas
+                continuam no WhatsApp.
               </p>
               <div className="mt-6">
                 <ContactForm />
               </div>
             </div>
+
+            <Link
+              to="/candidaturas"
+              className="mt-6 flex items-center gap-4 border border-border bg-white p-5 transition hover:border-primary"
+            >
+              <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-border text-primary">
+                <Briefcase className="h-5 w-5" />
+              </span>
+              <span>
+                <span className="block font-display text-lg font-semibold text-ink">
+                  Quer trabalhar connosco?
+                </span>
+                <span className="mt-1 block text-sm text-ink-muted">
+                  Envie a sua candidatura em poucos minutos.
+                </span>
+              </span>
+            </Link>
           </Reveal>
         </div>
       </section>

@@ -16,9 +16,10 @@ export function PageMeta({
   path = '/',
   image = '/og-cover.png',
   noIndex,
+  home,
 }: Props) {
   const site = getSiteUrl()
-  const fullTitle = title.includes('BH')
+  const fullTitle = home || title.includes('ARM')
     ? title
     : `${title} · ${company.shortName}`
   const url = `${site}${path.startsWith('/') ? path : `/${path}`}`
@@ -44,7 +45,7 @@ export function PageMeta({
       <meta property="og:image:height" content="630" />
       <meta
         property="og:image:alt"
-        content="Logotipo BH — Construção Civil e Obras Públicas, Lda."
+        content="Logotipo ARM — Construções, Unipessoal Lda."
       />
       <meta property="og:site_name" content={company.shortName} />
       <meta name="twitter:card" content="summary_large_image" />

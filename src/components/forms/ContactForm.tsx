@@ -1,11 +1,17 @@
 import { useState, type FormEvent } from 'react'
+import { Check, Loader2, MessageCircle } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
+import { company } from '@/data/company'
+import { whatsappUrl } from '@/data/whatsapp'
+import { isWeb3FormsConfigured, submitWeb3Form } from '@/lib/web3forms'
 
-type Status = 'idle' | 'success'
+type Status = 'idle' | 'submitting' | 'success' | 'error'
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>('idle')
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const [serverError, setServerError] = useState('')
+  const configured = isWeb3FormsConfigured()
 
   function validate(form: FormData) {
     const next: Record<string, string> = {}
@@ -21,38 +27,98 @@ export function ContactForm() {
     return next
   }
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    const form = new FormData(e.currentTarget)
+    const formEl = e.currentTarget
+    const form = new FormData(formEl)
     const next = validate(form)
     setErrors(next)
+    setServerError('')
     if (Object.keys(next).length) return
-    setStatus('success')
+
+    // Honeypot
+    if (String(form.get('botcheck') || '')) return
+
+    setStatus('submitting')
+    const name = String(form.get('name') || '').trim()
+    const email = String(form.get('email') || '').trim()
+    const phone = String(form.get('phone') || '').trim()
+    const message = String(form.get('message') || '').trim()
+
+    const result = await submitWeb3Form({
+      subject: `[Contacto] ${name} — ARM Construções`,
+      from_name: 'Site ARM Construções',
+      form_type: 'contacto',
+      name,
+      email,
+      phone: phone || '—',
+      message,
+      replyto: email,
+    })
+
+    if (result.ok) {
+      setStatus('success')
+      formEl.reset()
+      return
+    }
+    setServerError(result.message)
+    setStatus('error')
   }
 
   if (status === 'success') {
     return (
       <div className="border border-primary/30 bg-paper p-8" role="status">
-        <p className="font-display text-2xl font-bold text-ink">Mensagem preparada</p>
+        <div className="mb-4 flex h-12 w-12 items-center justify-center bg-primary text-white">
+          <Check className="h-6 w-6" />
+        </div>
+        <p className="font-display text-2xl font-bold text-ink">Mensagem enviada</p>
         <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-          Esta é uma demonstração. A mensagem não foi enviada. Em produção, será
-          integrada com um serviço de email ou CRM.
+          Recebemos o seu contacto. A equipa ARM responde o mais breve possível.
+          Para urgências, use o WhatsApp.
         </p>
-        <Button className="mt-6" type="button" onClick={() => setStatus('idle')}>
-          Nova mensagem
-        </Button>
+        <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <Button type="button" onClick={() => setStatus('idle')}>
+            Nova mensagem
+          </Button>
+          <a
+            href={whatsappUrl('Olá, enviei um contacto pelo site e gostaria de falar consigo.')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center justify-center gap-2 border border-[#25D366]/40 bg-[#25D366]/10 px-5 py-3 text-sm font-semibold text-[#128C7E] transition hover:bg-[#25D366]/20"
+          >
+            <MessageCircle className="h-4 w-4" />
+            Continuar no WhatsApp
+          </a>
+        </div>
       </div>
     )
   }
 
   return (
     <form onSubmit={onSubmit} className="space-y-5" noValidate>
+      {!configured ? (
+        <p className="border border-amber-500/30 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          A chave Web3Forms ainda não está configurada neste ambiente. O envio
+          ficará ativo após definir <code className="font-mono">VITE_WEB3FORMS_ACCESS_KEY</code>.
+        </p>
+      ) : null}
+
+      {/* Honeypot anti-spam */}
+      <input
+        type="checkbox"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        className="hidden"
+        aria-hidden
+      />
+
       <Field label="Nome" name="name" error={errors.name} required />
       <Field label="Email" name="email" type="email" error={errors.email} required />
       <Field label="Telefone" name="phone" type="tel" />
       <div>
         <label htmlFor="message" className="mb-2 block text-sm font-medium text-ink">
-          Mensagem
+          Mensagem *
         </label>
         <textarea
           id="message"
@@ -75,7 +141,34 @@ export function ContactForm() {
       {errors.consent ? (
         <p className="text-xs text-primary">{errors.consent}</p>
       ) : null}
-      <Button type="submit">Enviar mensagem</Button>
+
+      {serverError ? (
+        <p className="border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-primary" role="alert">
+          {serverError}
+        </p>
+      ) : null}
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+        <Button type="submit" disabled={status === 'submitting' || !configured}>
+          {status === 'submitting' ? (
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              A enviar…
+            </>
+          ) : (
+            'Enviar mensagem'
+          )}
+        </Button>
+        <a
+          href={whatsappUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-[#128C7E] hover:underline"
+        >
+          <MessageCircle className="h-4 w-4" />
+          Preferir WhatsApp · {company.phones[0].display}
+        </a>
+      </div>
     </form>
   )
 }

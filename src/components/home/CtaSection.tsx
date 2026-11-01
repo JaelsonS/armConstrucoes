@@ -12,7 +12,7 @@ const options = [
     tipo: s.quoteTipo,
     Icon: s.icon,
   })),
-  { label: 'Outro projeto', tipo: 'outro', Icon: CircleHelp },
+  { label: 'Outro', tipo: 'outro', Icon: CircleHelp },
 ]
 
 export function CtaSection() {
@@ -22,16 +22,16 @@ export function CtaSection() {
       <div className="container-bh relative">
         <Reveal>
           <SectionHeading
-            eyebrow="Captação"
-            title="Tem um projeto em mente?"
-            description="Partilhe connosco o que pretende construir, renovar ou transformar. A nossa equipa está disponível para conhecer o seu projeto."
+            eyebrow="Orçamento"
+            title="Vamos construir o próximo projeto?"
+            description="Tem uma obra para realizar, um edifício para renovar ou uma solução construtiva para desenvolver? Partilhe connosco o seu projeto."
             className="max-w-2xl"
           />
         </Reveal>
 
         <Reveal delay={0.08}>
           <p className="mt-10 font-mono text-xs uppercase tracking-[0.2em] text-ink-muted">
-            Escolha o tipo de projeto
+            Selecione o tipo de projeto
           </p>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {options.map((opt) => {
@@ -58,7 +58,7 @@ export function CtaSection() {
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Button to="/orcamento">Pedir orçamento</Button>
             <Button to="/contactos" variant="outline">
-              Contactar a BH
+              Contactar diretamente
             </Button>
           </div>
         </Reveal>

@@ -7,11 +7,13 @@ import { company, fullAddress } from '@/data/company'
 import { differentials } from '@/data/method'
 
 export function Empresa() {
+  const phone = company.phones[0]
+
   return (
     <>
       <PageMeta
         title="Empresa"
-        description="Conheça a BH — Construção Civil e Obras Públicas, Lda., sediada em Coimbra."
+        description="Conheça a ARM — Construções, Unipessoal Lda., em Coimbra e arredores."
         path="/empresa"
       />
       <section className="relative overflow-hidden bg-ink pb-20 pt-28 text-white lg:pb-28 lg:pt-36">
@@ -23,10 +25,10 @@ export function Empresa() {
               Empresa
             </p>
             <h1 className="max-w-4xl font-display text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              Experiência que se transforma em obra.
+              {company.aboutTitle}
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
-              {company.description}
+              {company.description} {company.descriptionExtra}
             </p>
           </Reveal>
         </div>
@@ -37,7 +39,7 @@ export function Empresa() {
           <Reveal>
             <img
               src="/images/equipa-obra.jpg"
-              alt="Equipa técnica em contexto de obra"
+              alt="Contexto de obra e equipamentos"
               className="aspect-[4/5] w-full object-cover"
               loading="lazy"
             />
@@ -46,7 +48,7 @@ export function Empresa() {
             <SectionHeading
               eyebrow="Identidade"
               title="Rigor técnico ao serviço de cada projeto."
-              description="A BH atua no setor da construção civil e obras públicas a partir de Coimbra, com foco na qualidade de execução, na comunicação clara e no compromisso com o resultado final."
+              description="A ARM atua no setor da construção civil e obras públicas a partir de Coimbra, com foco na qualidade de execução, na comunicação clara e no compromisso com o resultado final."
             />
             <dl className="mt-10 space-y-5 border-t border-border pt-8 text-sm">
               <div>
@@ -66,10 +68,20 @@ export function Empresa() {
                   Contacto
                 </dt>
                 <dd className="mt-1 font-medium text-ink">
+                  <a href={phone.href} className="hover:text-primary">
+                    {phone.display}
+                  </a>
+                  <br />
                   <a href={company.emailHref} className="hover:text-primary">
                     {company.email}
                   </a>
                 </dd>
+              </div>
+              <div>
+                <dt className="font-mono text-[11px] uppercase tracking-wider text-ink-muted">
+                  Área de atuação
+                </dt>
+                <dd className="mt-1 font-medium text-ink">{company.areaServed}</dd>
               </div>
             </dl>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">

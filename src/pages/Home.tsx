@@ -4,29 +4,31 @@ import { Hero } from '@/components/home/Hero'
 import { AboutTeaser } from '@/components/home/AboutTeaser'
 import { ServicesSection } from '@/components/home/ServicesSection'
 import { PortfolioPreview } from '@/components/home/PortfolioPreview'
+import { CapotoSection } from '@/components/home/CapotoSection'
+import { MetalStructuresSection } from '@/components/home/MetalStructuresSection'
 import { MethodSection } from '@/components/home/MethodSection'
 import { Differentials } from '@/components/home/Differentials'
 import { CtaSection } from '@/components/home/CtaSection'
-import { company } from '@/data/company'
+import { company, getSiteUrl } from '@/data/company'
 
 const schema = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: company.legalName,
   description: company.description,
-  url: company.siteUrl,
-  email: company.email,
+  url: getSiteUrl(),
   telephone: company.phones.map((p) => p.display),
+  email: company.email,
   address: {
     '@type': 'PostalAddress',
-    streetAddress: `${company.address.line1}, ${company.address.line2}`,
+    streetAddress: company.address.line1,
     addressLocality: company.address.locality,
     addressRegion: company.address.city,
     postalCode: company.address.postalCode,
     addressCountry: 'PT',
   },
-  areaServed: 'Coimbra, Portugal',
-  image: `${company.siteUrl}/images/bh-logo.png`,
+  areaServed: company.areaServed,
+  image: `${getSiteUrl()}/images/arm-logo.png`,
 }
 
 export function Home() {
@@ -34,8 +36,8 @@ export function Home() {
     <>
       <PageMeta
         home
-        title="BH Construção · Construção Civil e Obras Públicas em Coimbra"
-        description="BH — Construção Civil e Obras Públicas, Lda. em Coimbra. Construção, reabilitação e acabamentos com rigor técnico."
+        title="ARM Construções — Construção civil e obras públicas em Coimbra"
+        description="ARM — Construções, Unipessoal Lda. em Coimbra e arredores. Construção civil, obras públicas, capoto, estruturas metálicas e remodelações."
         path="/"
       />
       <Helmet>
@@ -45,6 +47,8 @@ export function Home() {
       <AboutTeaser />
       <ServicesSection />
       <PortfolioPreview />
+      <CapotoSection />
+      <MetalStructuresSection />
       <MethodSection />
       <Differentials />
       <CtaSection />

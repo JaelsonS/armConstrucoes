@@ -8,7 +8,7 @@ export function Orcamento() {
     <>
       <PageMeta
         title="Pedir orçamento"
-        description="Solicite um orçamento à BH Construção. Formulário em etapas para construção, reabilitação e acabamentos."
+        description="Solicite um orçamento à ARM Construções. Formulário em etapas para construção, capoto, estruturas metálicas e remodelações."
         path="/orcamento"
       />
       <section className="relative overflow-hidden bg-ink pb-14 pt-28 text-white lg:pt-36">

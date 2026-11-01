@@ -10,7 +10,7 @@ import { Reveal } from '@/components/ui/Reveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { TechnicalGrid } from '@/components/ui/TechnicalGrid'
 
-const icons = [ShieldCheck, Eye, Handshake, Wrench, Ruler]
+const icons = [Handshake, ShieldCheck, Ruler, Eye, Wrench]
 
 export function Differentials() {
   return (
@@ -20,19 +20,19 @@ export function Differentials() {
         <Reveal>
           <SectionHeading
             light
-            eyebrow="Compromisso"
-            title="Mais do que construir. É assumir um compromisso."
+            eyebrow="Valores"
+            title="Cada projeto merece atenção ao detalhe."
           />
           <div className="mt-10 grid grid-cols-2 gap-3">
             <img
-              src="/images/revestimentos.jpg"
-              alt="Aplicação de revestimento com nível"
+              src="/images/capoto.jpg"
+              alt="Trabalho de fachada e isolamento"
               className="aspect-square w-full object-cover"
               loading="lazy"
             />
             <img
-              src="/images/carpintaria.jpg"
-              alt="Detalhe de carpintaria"
+              src="/images/estruturas-metalicas.jpg"
+              alt="Estrutura metálica em obra"
               className="mt-8 aspect-square w-full object-cover"
               loading="lazy"
             />

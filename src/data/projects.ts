@@ -1,9 +1,9 @@
 export type ProjectCategory =
-  | 'Construcao'
-  | 'Obras Publicas'
-  | 'Reabilitacao'
-  | 'Acabamentos'
-  | 'Carpintaria'
+  | 'Construção'
+  | 'Obras Públicas'
+  | 'Capoto'
+  | 'Estruturas Metálicas'
+  | 'Remodelações'
 
 export type Project = {
   id: string
@@ -11,7 +11,12 @@ export type Project = {
   code: string
   title: string
   category: ProjectCategory
-  filter: 'construcao' | 'obras-publicas' | 'reabilitacao' | 'acabamentos'
+  filter:
+    | 'construcao'
+    | 'obras-publicas'
+    | 'capoto'
+    | 'estruturas-metalicas'
+    | 'remodelacoes'
   location: string
   summary: string
   challenge: string
@@ -26,17 +31,18 @@ export const projectFilters = [
   { id: 'todos', label: 'Todos' },
   { id: 'construcao', label: 'Construção' },
   { id: 'obras-publicas', label: 'Obras Públicas' },
-  { id: 'reabilitacao', label: 'Reabilitação' },
-  { id: 'acabamentos', label: 'Acabamentos' },
+  { id: 'capoto', label: 'Capoto' },
+  { id: 'estruturas-metalicas', label: 'Estruturas Metálicas' },
+  { id: 'remodelacoes', label: 'Remodelações' },
 ] as const
 
 export const projects: Project[] = [
   {
-    id: 'bh-d01',
-    slug: 'projeto-de-construcao',
-    code: 'BH-D01',
-    title: 'Projeto de Construção',
-    category: 'Construcao',
+    id: 'arm-d01',
+    slug: 'moradia-contemporanea',
+    code: 'ARM-D01',
+    title: 'Moradia contemporânea',
+    category: 'Construção',
     filter: 'construcao',
     location: 'Região de Coimbra',
     summary:
@@ -46,37 +52,69 @@ export const projects: Project[] = [
     solution:
       'Planeamento faseado, coordenação de equipas e controlo de qualidade em cada etapa.',
     result:
-      'Demonstração de um processo estruturado, preparado para adaptação a projetos reais da BH.',
+      'Demonstração de um processo estruturado, preparado para adaptação a projetos reais da ARM.',
     cover: '/images/construcao.jpg',
-    gallery: ['/images/construcao.jpg', '/images/hero-obra.jpg', '/images/equipa-obra.jpg'],
+    gallery: [
+      '/images/construcao.jpg',
+      '/images/hero-obra.jpg',
+      '/images/equipa-obra.jpg',
+    ],
     demo: true,
   },
   {
-    id: 'bh-d02',
-    slug: 'intervencao-em-edificio',
-    code: 'BH-D02',
-    title: 'Intervenção em Edifício',
-    category: 'Reabilitacao',
-    filter: 'reabilitacao',
-    location: 'Centro de Coimbra',
+    id: 'arm-d02',
+    slug: 'pavilhao-estrutura-metalica',
+    code: 'ARM-D02',
+    title: 'Pavilhão em estrutura metálica',
+    category: 'Estruturas Metálicas',
+    filter: 'estruturas-metalicas',
+    location: 'Distrito de Coimbra',
     summary:
-      'Conteúdo demonstrativo. Exemplo de reabilitação com valorização do edificado existente.',
+      'Conteúdo demonstrativo. Exemplo de estrutura metálica para pavilhão com montagem acompanhada em obra.',
     challenge:
-      'Intervir num espaço existente preservando a funcionalidade e melhorando o desempenho.',
+      'Garantir precisão dimensional, estabilidade e prazo de montagem em contexto de obra.',
     solution:
-      'Diagnóstico cuidadoso, remoção seletiva e modernização de acabamentos e sistemas.',
+      'Preparação cuidada dos elementos, sequência de montagem e verificação contínua em obra.',
     result:
-      'Ilustração de uma intervenção equilibrada entre renovação e respeito pelo existente.',
-    cover: '/images/reabilitacao.jpg',
-    gallery: ['/images/reabilitacao.jpg', '/images/acabamentos.jpg', '/images/revestimentos.jpg'],
+      'Ilustração da capacidade da ARM em soluções metálicas complementares à construção civil.',
+    cover: '/images/estruturas-metalicas.jpg',
+    gallery: [
+      '/images/estruturas-metalicas.jpg',
+      '/images/hero-obra.jpg',
+      '/images/obras-publicas.jpg',
+    ],
     demo: true,
   },
   {
-    id: 'bh-d03',
-    slug: 'obra-de-infraestrutura',
-    code: 'BH-D03',
-    title: 'Obra de Infraestrutura',
-    category: 'Obras Publicas',
+    id: 'arm-d03',
+    slug: 'reabilitacao-fachada-capoto',
+    code: 'ARM-D03',
+    title: 'Reabilitação de fachada com capoto',
+    category: 'Capoto',
+    filter: 'capoto',
+    location: 'Coimbra',
+    summary:
+      'Conteúdo demonstrativo. Aplicação de isolamento térmico exterior com renovação estética da fachada.',
+    challenge:
+      'Melhorar o desempenho térmico sem reduzir área interior útil.',
+    solution:
+      'Sistema de capoto em camadas contínuas, com atenção a pontes térmicas e acabamento final.',
+    result:
+      'Demonstração dos benefícios de conforto, proteção e valorização do edifício.',
+    cover: '/images/capoto.jpg',
+    gallery: [
+      '/images/capoto.jpg',
+      '/images/construcao.jpg',
+      '/images/manutencao.jpg',
+    ],
+    demo: true,
+  },
+  {
+    id: 'arm-d04',
+    slug: 'requalificacao-espaco-publico',
+    code: 'ARM-D04',
+    title: 'Requalificação de espaço público',
+    category: 'Obras Públicas',
     filter: 'obras-publicas',
     location: 'Distrito de Coimbra',
     summary:
@@ -88,107 +126,107 @@ export const projects: Project[] = [
     result:
       'Demonstração da capacidade de organização para empreitadas de natureza pública.',
     cover: '/images/obras-publicas.jpg',
-    gallery: ['/images/obras-publicas.jpg', '/images/hero-obra.jpg', '/images/construcao.jpg'],
+    gallery: [
+      '/images/obras-publicas.jpg',
+      '/images/hero-obra.jpg',
+      '/images/equipa-obra.jpg',
+    ],
     demo: true,
   },
   {
-    id: 'bh-d04',
-    slug: 'trabalhos-de-acabamento',
-    code: 'BH-D04',
-    title: 'Trabalhos de Acabamento',
-    category: 'Acabamentos',
-    filter: 'acabamentos',
-    location: 'Coimbra',
+    id: 'arm-d05',
+    slug: 'remodelacao-interior',
+    code: 'ARM-D05',
+    title: 'Remodelação de interior',
+    category: 'Remodelações',
+    filter: 'remodelacoes',
+    location: 'Coimbra e arredores',
     summary:
-      'Conteúdo demonstrativo. Foco na qualidade de execução e no detalhe final da obra.',
-    challenge:
-      'Garantir uniformidade, alinhamentos e acabamento limpo em todas as superfícies.',
-    solution:
-      'Seleção cuidadosa de materiais e controlo rigoroso da aplicação em obra.',
-    result:
-      'Exemplo visual do nível de cuidado pretendido na fase de acabamentos.',
-    cover: '/images/acabamentos.jpg',
-    gallery: ['/images/acabamentos.jpg', '/images/revestimentos.jpg', '/images/carpintaria.jpg'],
-    demo: true,
-  },
-  {
-    id: 'bh-d05',
-    slug: 'carpintaria-integrada',
-    code: 'BH-D05',
-    title: 'Carpintaria Integrada',
-    category: 'Carpintaria',
-    filter: 'acabamentos',
-    location: 'Região Centro',
-    summary:
-      'Conteúdo demonstrativo. Trabalhos de carpintaria integrados em construção e reabilitação.',
-    challenge:
-      'Integrar elementos de madeira com o restante projeto de forma coerente e precisa.',
-    solution:
-      'Medição cuidada, fabrico/ajuste e instalação alinhada com o desenho geral.',
-    result:
-      'Demonstração da integração da carpintaria no conjunto da obra.',
-    cover: '/images/carpintaria.jpg',
-    gallery: ['/images/carpintaria.jpg', '/images/acabamentos.jpg', '/images/equipa-obra.jpg'],
-    demo: true,
-  },
-  {
-    id: 'bh-d06',
-    slug: 'requalificacao-de-espaco',
-    code: 'BH-D06',
-    title: 'Requalificação de Espaço',
-    category: 'Reabilitacao',
-    filter: 'reabilitacao',
-    location: 'Ribeira de Frades',
-    summary:
-      'Conteúdo demonstrativo. Modernização e valorização de um espaço existente.',
+      'Conteúdo demonstrativo. Renovação e transformação de um espaço existente.',
     challenge:
       'Adaptar o espaço a novas necessidades sem comprometer a funcionalidade.',
     solution:
-      'Remodelação faseada com atenção a revestimentos, circulações e acabamentos.',
+      'Remodelação faseada com atenção a circulações, acabamentos e detalhe de execução.',
     result:
-      'Ilustração de uma requalificação clara e orientada ao uso do espaço.',
-    cover: '/images/revestimentos.jpg',
-    gallery: ['/images/revestimentos.jpg', '/images/reabilitacao.jpg', '/images/acabamentos.jpg'],
+      'Ilustração de uma remodelação clara e orientada ao uso do espaço.',
+    cover: '/images/remodelacoes.jpg',
+    gallery: [
+      '/images/remodelacoes.jpg',
+      '/images/manutencao.jpg',
+      '/images/construcao.jpg',
+    ],
     demo: true,
   },
   {
-    id: 'bh-d07',
-    slug: 'projeto-de-reabilitacao',
-    code: 'BH-D07',
-    title: 'Projeto de Reabilitação',
-    category: 'Reabilitacao',
-    filter: 'reabilitacao',
+    id: 'arm-d06',
+    slug: 'manutencao-edificio',
+    code: 'ARM-D06',
+    title: 'Manutenção e recuperação de edifício',
+    category: 'Remodelações',
+    filter: 'remodelacoes',
+    location: 'Botão, Coimbra',
+    summary:
+      'Conteúdo demonstrativo. Intervenção de manutenção e valorização de edificado existente.',
+    challenge:
+      'Corrigir patologias e recuperar elementos sem interromper o uso do espaço.',
+    solution:
+      'Diagnóstico, priorização de trabalhos e execução controlada das intervenções.',
+    result:
+      'Exemplo do cuidado pretendido em manutenção e recuperação.',
+    cover: '/images/manutencao.jpg',
+    gallery: [
+      '/images/manutencao.jpg',
+      '/images/capoto.jpg',
+      '/images/remodelacoes.jpg',
+    ],
+    demo: true,
+  },
+  {
+    id: 'arm-d07',
+    slug: 'cobertura-estrutura-apoio',
+    code: 'ARM-D07',
+    title: 'Cobertura e estrutura de apoio',
+    category: 'Estruturas Metálicas',
+    filter: 'estruturas-metalicas',
+    location: 'Região Centro',
+    summary:
+      'Conteúdo demonstrativo. Estrutura metálica de apoio e cobertura com montagem em obra.',
+    challenge:
+      'Integrar a estrutura metálica com o restante projeto construtivo.',
+    solution:
+      'Coordenação técnica, montagem acompanhada e verificação de ligações.',
+    result:
+      'Demonstração de precisão e robustez em soluções metálicas.',
+    cover: '/images/estruturas-metalicas.jpg',
+    gallery: [
+      '/images/estruturas-metalicas.jpg',
+      '/images/obras-publicas.jpg',
+      '/images/hero-obra.jpg',
+    ],
+    demo: true,
+  },
+  {
+    id: 'arm-d08',
+    slug: 'isolamento-termico-moradia',
+    code: 'ARM-D08',
+    title: 'Isolamento térmico de moradia',
+    category: 'Capoto',
+    filter: 'capoto',
     location: 'Coimbra',
     summary:
-      'Conteúdo demonstrativo. Abordagem de renovação com foco em execução e detalhe.',
+      'Conteúdo demonstrativo. Sistema de isolamento térmico exterior aplicado a moradia.',
     challenge:
-      'Equilibrar intervenção estrutural e acabamentos finais num edifício existente.',
+      'Assegurar continuidade do isolamento e qualidade do acabamento final.',
     solution:
-      'Sequência de trabalhos bem definida e verificação contínua da qualidade.',
+      'Aplicação camada a camada com controlo de alinhamentos e remates.',
     result:
-      'Demonstração do método BH aplicado a contextos de reabilitação.',
-    cover: '/images/equipa-obra.jpg',
-    gallery: ['/images/equipa-obra.jpg', '/images/reabilitacao.jpg', '/images/construcao.jpg'],
-    demo: true,
-  },
-  {
-    id: 'bh-d08',
-    slug: 'aplicacao-de-revestimentos',
-    code: 'BH-D08',
-    title: 'Aplicação de Revestimentos',
-    category: 'Acabamentos',
-    filter: 'acabamentos',
-    location: 'Distrito de Coimbra',
-    summary:
-      'Conteúdo demonstrativo. Execução de revestimentos com atenção ao alinhamento e acabamento.',
-    challenge:
-      'Assegurar planimetria, juntas e acabamento consistente em toda a superfície.',
-    solution:
-      'Preparação da base, escolha adequada de materiais e aplicação controlada.',
-    result:
-      'Exemplo do cuidado pretendido na especialidade de revestimentos.',
-    cover: '/images/revestimentos.jpg',
-    gallery: ['/images/revestimentos.jpg', '/images/acabamentos.jpg', '/images/carpintaria.jpg'],
+      'Exemplo visual do nível de cuidado pretendido em capoto.',
+    cover: '/images/capoto.jpg',
+    gallery: [
+      '/images/capoto.jpg',
+      '/images/construcao.jpg',
+      '/images/manutencao.jpg',
+    ],
     demo: true,
   },
 ]
@@ -200,7 +238,11 @@ export function getProjectBySlug(slug: string) {
 export function getRelatedProjects(slug: string, limit = 3) {
   const current = getProjectBySlug(slug)
   if (!current) return projects.slice(0, limit)
-  return projects.filter((p) => p.slug !== slug && p.filter === current.filter).slice(0, limit)
-    .concat(projects.filter((p) => p.slug !== slug && p.filter !== current.filter))
+  return projects
+    .filter((p) => p.slug !== slug && p.filter === current.filter)
+    .slice(0, limit)
+    .concat(
+      projects.filter((p) => p.slug !== slug && p.filter !== current.filter),
+    )
     .slice(0, limit)
 }

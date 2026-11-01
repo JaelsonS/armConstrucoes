@@ -6,7 +6,7 @@ export function Privacidade() {
     <>
       <PageMeta
         title="Política de privacidade"
-        description="Informação sobre tratamento de dados pessoais na demonstração do website BH."
+        description="Informação sobre tratamento de dados pessoais na demonstração do website ARM Construções."
         path="/privacidade"
       />
       <section className="bg-white pb-20 pt-28 lg:pb-28 lg:pt-36">
@@ -25,9 +25,11 @@ export function Privacidade() {
           <p className="mt-3 text-ink-muted">
             {company.legalName}
             <br />
+            Telefone: {company.phones[0].display}
+            <br />
             Email: {company.email}
             <br />
-            Telefone: {company.phones[0].display}
+            Área: {company.areaServed}
           </p>
 
           <h2 className="mt-10 font-display text-2xl font-bold text-ink">
@@ -35,17 +37,19 @@ export function Privacidade() {
           </h2>
           <p className="mt-3 text-ink-muted">
             Nos formulários de contacto e orçamento poderão ser indicados nome,
-            email, telefone, empresa e informações sobre o projeto. Na presente
-            demonstração, estes dados <strong>não são armazenados</strong> nem
-            transmitidos a um servidor.
+            email, telefone, empresa e informações sobre o projeto. No formulário
+            de candidaturas poderão ainda ser recolhidos dados profissionais e o
+            curriculum vitae (ficheiro PDF ou Word). Os envios são processados
+            através do serviço Web3Forms e encaminhados para o email da ARM.
           </p>
 
           <h2 className="mt-10 font-display text-2xl font-bold text-ink">
             3. Finalidade
           </h2>
           <p className="mt-3 text-ink-muted">
-            Em produção, os dados serão utilizados exclusivamente para responder
-            a pedidos de contacto ou orçamento e para gestão comercial relacionada.
+            Os dados são utilizados para responder a pedidos de contacto ou
+            orçamento, gestão comercial relacionada e, no caso das candidaturas,
+            para análise de perfil e processos de recrutamento.
           </p>
 
           <h2 className="mt-10 font-display text-2xl font-bold text-ink">
@@ -61,7 +65,11 @@ export function Privacidade() {
           </h2>
           <p className="mt-3 text-ink-muted">
             O titular pode solicitar acesso, retificação, apagamento, limitação,
-            oposição e portabilidade dos dados, contactando {company.email}.
+            oposição e portabilidade dos dados, contactando{' '}
+            <a href={company.emailHref} className="text-primary hover:underline">
+              {company.email}
+            </a>{' '}
+            ou {company.phones[0].display}.
           </p>
 
           <h2 className="mt-10 font-display text-2xl font-bold text-ink">

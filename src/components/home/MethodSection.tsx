@@ -19,8 +19,8 @@ export function MethodSection() {
       <div className="container-bh">
         <Reveal>
           <SectionHeading
-            eyebrow="Método"
-            title="Do primeiro contacto à obra concluída."
+            eyebrow="Processo"
+            title="Um processo claro. Uma execução responsável."
             className="mb-12 lg:mb-16"
           />
         </Reveal>
@@ -37,7 +37,7 @@ export function MethodSection() {
             )}
           </div>
 
-          <ol className="grid gap-8 md:grid-cols-2">
+          <ol className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
             {methodSteps.map((step, i) => (
               <Reveal key={step.number} delay={i * 0.06}>
                 <li className="border border-border bg-paper/60 p-6 sm:p-8">

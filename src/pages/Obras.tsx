@@ -19,7 +19,7 @@ export function Obras() {
     <>
       <PageMeta
         title="Obras"
-        description="Portfólio demonstrativo de construção, reabilitação e acabamentos da BH em Coimbra."
+        description="Portfólio demonstrativo de construção, capoto, estruturas metálicas e remodelações da ARM em Coimbra."
         path="/obras"
       />
       <section className="relative overflow-hidden bg-ink pb-16 pt-28 text-white lg:pb-24 lg:pt-36">
@@ -29,8 +29,8 @@ export function Obras() {
             <SectionHeading
               light
               eyebrow="Portfólio"
-              title="Obras que falam por nós."
-              description="Projetos apresentados a título demonstrativo. Serão substituídos pelas obras reais da BH."
+              title="Obras que demonstram capacidade."
+              description="Projetos apresentados a título demonstrativo. Serão substituídos pelas obras reais da ARM."
             />
           </Reveal>
         </div>

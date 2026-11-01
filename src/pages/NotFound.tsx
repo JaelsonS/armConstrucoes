@@ -7,7 +7,7 @@ export function NotFound() {
     <>
       <PageMeta
         title="Página não encontrada"
-        description="A página solicitada não existe no website da BH Construção."
+        description="A página solicitada não existe no website da ARM Construções."
         path="/404"
         noIndex
       />

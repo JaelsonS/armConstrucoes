@@ -13,7 +13,7 @@ export function ServicesSection() {
           <Reveal>
             <SectionHeading
               eyebrow="Serviços"
-              title="Competência em cada etapa da construção."
+              title="Soluções para construir, renovar e transformar."
             />
           </Reveal>
           <Reveal delay={0.1}>
@@ -48,7 +48,7 @@ export function ServicesSection() {
                         <Icon className="h-5 w-5 text-primary" strokeWidth={1.75} />
                       </span>
                       <span className="font-mono text-xs text-primary">
-                        {service.number}
+                        ARM-{service.number}
                       </span>
                     </div>
                     <h3 className="font-display text-xl font-bold sm:text-2xl">
@@ -58,7 +58,7 @@ export function ServicesSection() {
                       {service.description}
                     </p>
                     <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-white">
-                      Conhecer serviço
+                      Saber mais
                       <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     </span>
                   </div>
